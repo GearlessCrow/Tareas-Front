@@ -1,0 +1,43 @@
+<div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mt-5 mb-4">
+    <h2 class="section-tittle">Tareas</h2>
+    <div class="d-flex align-items-center flex-wrap gap-3 gap-sm-5">
+        
+        <a routerLink="/tareas/nueva" class="btn btn-primary">Agregar Tarea</a>
+
+    </div>
+</div>
+<div class="table-responsive mb-5">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Estado</th>
+                <th scope="col" class="table-head-action"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngIf="tareas.length; else emptyMessage">
+                <tr *ngFor="let tarea of tareas">
+                    <td>{{tarea.id}}</td>
+                    <td>{{tarea.titulo}}</td>
+                    <td>{{tarea.descripcion}}</td>
+                    <td>{{tarea.estado}}</td>
+                    <td class="table-data-action">
+                        <div>
+                            <a [routerLink]="['/tareas', tarea.id, 'editar']"><i class="ri-edit-box-line"></i></a>
+                            <button (click)="deleteTareas(tarea.id)" class="btn btn-link p-0"><i class="ri-delete-bin-2-line"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-container>
+            <ng-template #emptyMessage>
+                <tr>
+                    <td colspan="6">No Hay Tareas</td>
+                </tr>
+
+            </ng-template>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,59 @@
+<div class="d-flex align-items-center justify-content-between flex-wrap mt-5 mb-4 border-bottom">
+    <h2 class="section-tittle mb-4">{{getFormTittle()}} </h2>
+    <div class="d-flex gap-2 mb-3">
+        <a routerLink="/tareas" class="btn btn-outline-secondary">Cancelar</a>
+        <button
+        type="button"
+        class="btn btn.btn-primary"
+        (click)="saveTareas()"
+        [disabled]="tareasForm.invalid"
+        >Guardar Tarea</button>
+    </div>
+</div>
+<form class="mb-5" [formGroup]="tareasForm"(ngSubmit)="saveTareas()">
+    <div class="mb-3">
+        <label for="tituloInput" class="form label">Titulo de tarea</label>
+        <input 
+        type="text"
+        formControlName="titulo"
+        class="form-control{{hasError('titulo')? 'is-invalid' : ''}}"
+        id="tituloInput"
+        placeholder="Titulo de tarea"
+        >
+        <div class="invalid-feedback" [ngSwitch]="getCurrentError('titulo')">
+            <span *ngSwitchCase="'required'">el campo titulo es requerido</span>
+            <span *ngSwitchCase="'maxlength'">Solo hasta 100 caracteres</span>
+
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="descripcionInput" class="form label">Descripcion de tarea</label>
+        <input 
+        type="text"
+        formControlName="descripcion"
+        class="form-control {{ hasError('descripcion)? 'is-invalid' : '' }}"
+        id="descripcionInput"
+        placeholder="Descripcion de tarea"
+        >
+        <div class="invalid-feedback" [ngSwitch]="getCurrentError('descripcion')">
+            <span *ngSwitchCase="'required'">el campo descripcion es requerido</span>
+            <span *ngSwitchCase="'maxlength'">Solo hasta 250 caracteres</span>
+
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="estadoInput" class="form label">Estado de tarea</label>
+        <input 
+        type="text"
+        formControlName="estado"
+        class="form-control {{ hasError('estado)? 'is-invalid' : '' }}"
+        id="estadoInput"
+        placeholder="estado de tarea"
+        >
+        <div class="invalid-feedback" [ngSwitch]="getCurrentError('estado')">
+            <span *ngSwitchCase="'required'">el campo descripcion es requerido</span>
+            <span *ngSwitchCase="'maxlength'">solo Completo, En progreso, pendiente</span>
+
+        </div>
+    </div>
+</form>   
